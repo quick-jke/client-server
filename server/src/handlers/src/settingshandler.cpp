@@ -28,8 +28,9 @@ RequestHandler::Response SettingsHandler::handleGet(const RequestHandler::Reques
     
     Config& config = Config::instance();
     
-    QString iniPath = config.stringValue("path.ini", "");
+    QString projectPath = config.stringValue("path.project", "");
 
+    QString iniPath = projectPath + "/config.ini";
     QJsonObject response;
     response["iniPath"] = iniPath;
     response["exists"] = QFile::exists(iniPath);
