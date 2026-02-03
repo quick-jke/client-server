@@ -1,4 +1,4 @@
-#include "include/hellohandler.h"
+#include "include/hello.h"
 #include <QDateTime>
 
 RequestHandler::Response HelloHandler::handleRequest(const RequestHandler::Request& request)

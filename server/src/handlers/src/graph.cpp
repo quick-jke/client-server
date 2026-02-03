@@ -1,4 +1,4 @@
-#include "include/graphhandler.h"
+#include "include/graph.h"
 #include <QJsonArray>
 
 GraphHandler::GraphHandler()

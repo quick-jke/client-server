@@ -40,7 +40,14 @@ int main(int argc, char *argv[])
 
         LOG_INFO("2. Testing /api/settings");
         client.get("http://localhost:8080/api/settings");
-        
+
+        LOG_INFO("3. Testing /api/objects with params");
+        QVariantMap params;
+        params["oldRect"] = "0";
+        params["oldScale"] = "0";
+        params["newRect"] = "2";
+        params["newScale"] = "4";
+        client.get("http://localhost:8080/api/objects", params);
         // // 2. Hello with parameter
         // LOG_INFO("\n2. Testing /api/hello?name=Alice");
         // QVariantMap params;

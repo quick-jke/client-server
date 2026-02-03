@@ -5,14 +5,16 @@ add_executable(http_server
     src/httpserver.h
     src/httpserver.cpp
     src/handlers/include/basehandler.h
-    src/handlers/include/hellohandler.h
-    src/handlers/src/hellohandler.cpp
-    src/handlers/include/usershandler.h
-    src/handlers/src/usershandler.cpp
-    src/handlers/include/graphhandler.h
-    src/handlers/src/graphhandler.cpp
-    src/handlers/include/settingshandler.h
-    src/handlers/src/settingshandler.cpp
+    src/handlers/include/hello.h
+    src/handlers/src/hello.cpp
+    src/handlers/include/users.h
+    src/handlers/src/users.cpp
+    src/handlers/include/graph.h
+    src/handlers/src/graph.cpp
+    src/handlers/include/settings.h
+    src/handlers/src/settings.cpp
+    src/handlers/src/objects.cpp
+    src/handlers/include/objects.h
     src/middleware/include/loggermiddleware.h
     src/middleware/src/loggermiddleware.cpp
     src/middleware/include/authmiddleware.h

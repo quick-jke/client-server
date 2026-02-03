@@ -1,4 +1,4 @@
-#include "include/settingshandler.h"
+#include "include/settings.h"
 #include "../../lib/common/config.h"
 #include <QJsonObject>
 #include <QFile>

@@ -4,10 +4,11 @@
 #include <vector>
 #include <memory>
 #include "httpserver.h"
-#include "handlers/include/hellohandler.h"
-#include "handlers/include/usershandler.h"
-#include "handlers/include/graphhandler.h"
-#include "handlers/include/settingshandler.h"
+#include "handlers/include/hello.h"
+#include "handlers/include/users.h"
+#include "handlers/include/graph.h"
+#include "handlers/include/settings.h"
+#include "handlers/include/objects.h"
 #include "middleware/include/loggermiddleware.h"
 #include "middleware/include/authmiddleware.h"
 #include "../../lib/common/logger.h"
@@ -74,10 +75,11 @@ int main(int argc, char *argv[])
     
     // Создание маршрутизатора
     auto router = std::make_unique<RouterHandler>();
-    router->addRoute("/api/hello", std::make_unique<HelloHandler>());
-    router->addRoute("/api/users", std::make_unique<UsersHandler>());
-    router->addRoute("/api/graph", std::make_unique<GraphHandler>());
-    router->addRoute("/api/settings", std::make_unique<SettingsHandler>());
+    router->addRoute("/api/hello",      std::make_unique<HelloHandler>());
+    router->addRoute("/api/users",      std::make_unique<UsersHandler>());
+    router->addRoute("/api/graph",      std::make_unique<GraphHandler>());
+    router->addRoute("/api/settings",   std::make_unique<SettingsHandler>());
+    router->addRoute("/api/objects",    std::make_unique<ObjectsHandler>());
     
     server.setRequestHandler(std::move(router));
     
