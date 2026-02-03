@@ -4,19 +4,19 @@ add_executable(http_server
     src/main.cpp
     src/httpserver.h
     src/httpserver.cpp
-    src/handlers/basehandler.h
-    src/handlers/hellohandler.h
-    src/handlers/hellohandler.cpp
-    src/handlers/usershandler.h
-    src/handlers/usershandler.cpp
-    src/handlers/graphhandler.h
-    src/handlers/graphhandler.cpp
-    src/handlers/settingshandler.h
-    src/handlers/settingshandler.cpp
-    src/middleware/loggermiddleware.h
-    src/middleware/loggermiddleware.cpp
-    src/middleware/authmiddleware.h
-    src/middleware/authmiddleware.cpp
+    src/handlers/include/basehandler.h
+    src/handlers/include/hellohandler.h
+    src/handlers/src/hellohandler.cpp
+    src/handlers/include/usershandler.h
+    src/handlers/src/usershandler.cpp
+    src/handlers/include/graphhandler.h
+    src/handlers/src/graphhandler.cpp
+    src/handlers/include/settingshandler.h
+    src/handlers/src/settingshandler.cpp
+    src/middleware/include/loggermiddleware.h
+    src/middleware/src/loggermiddleware.cpp
+    src/middleware/include/authmiddleware.h
+    src/middleware/src/authmiddleware.cpp
 )
 
 target_link_libraries(http_server PRIVATE 
@@ -31,6 +31,5 @@ target_include_directories(http_server PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/middleware
 )
 
-# Копирование конфигурации
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config/config.json 
-     DESTINATION ${CMAKE_BINARY_DIR}/server)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config/app.json 
+     DESTINATION ${CMAKE_BINARY_DIR})

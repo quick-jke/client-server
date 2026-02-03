@@ -1,4 +1,4 @@
-#include "settingshandler.h"
+#include "include/settingshandler.h"
 #include "../../lib/common/config.h"
 #include <QJsonObject>
 #include <QFile>
@@ -28,7 +28,7 @@ RequestHandler::Response SettingsHandler::handleGet(const RequestHandler::Reques
     
     Config& config = Config::instance();
     
-    QString iniPath = config.stringValue("path.ini", "");
+    QString iniPath = config.stringValue("path.db", "");
     
     QJsonObject response;
     response["iniPath"] = iniPath;

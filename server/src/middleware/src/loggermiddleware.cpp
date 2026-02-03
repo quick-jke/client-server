@@ -1,4 +1,4 @@
-#include "loggermiddleware.h"
+#include "include/loggermiddleware.h"
 #include "../../lib/common/logger.h"  // ← Добавлен заголовок логгера
 #include <QDateTime>
 

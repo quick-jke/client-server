@@ -5,7 +5,7 @@
         "maxConnections": 100
     },
     "path": {
-        "ini" : "config.ini"
+        "db" : "../../nsk_project/config.ini"
     },
     "logging": {
         "level": "debug",

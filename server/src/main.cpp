@@ -4,39 +4,33 @@
 #include <vector>
 #include <memory>
 #include "httpserver.h"
-#include "handlers/hellohandler.h"
-#include "handlers/usershandler.h"
-#include "handlers/graphhandler.h"
-#include "handlers/settingshandler.h"
-#include "middleware/loggermiddleware.h"
-#include "middleware/authmiddleware.h"
+#include "handlers/include/hellohandler.h"
+#include "handlers/include/usershandler.h"
+#include "handlers/include/graphhandler.h"
+#include "handlers/include/settingshandler.h"
+#include "middleware/include/loggermiddleware.h"
+#include "middleware/include/authmiddleware.h"
 #include "../../lib/common/logger.h"
 #include "../../lib/common/config.h"
 
-// Комбинированный обработчик для маршрутизации (безопасная реализация с вектором)
 class RouterHandler : public RequestHandler
 {
 public:
     void addRoute(const QString& pathPrefix, std::unique_ptr<RequestHandler> handler) {
-        // Сохраняем пару (префикс, обработчик) с перемещением уникального указателя
         m_routes.emplace_back(pathPrefix, std::move(handler));
     }
     
     Response handleRequest(const Request& request) override {
-        // Ищем от более длинных префиксов к коротким для правильного сопоставления
-        // Сортируем временно по длине префикса в обратном порядке
         std::vector<std::pair<QString, RequestHandler*>> sortedRoutes;
         for (auto& route : m_routes) {
             sortedRoutes.emplace_back(route.first, route.second.get());
         }
         
-        // Сортировка по длине префикса (от длинного к короткому)
         std::sort(sortedRoutes.begin(), sortedRoutes.end(), 
             [](const auto& a, const auto& b) {
                 return a.first.length() > b.first.length();
             });
         
-        // Поиск подходящего маршрута
         for (const auto& [prefix, handler] : sortedRoutes) {
             if (request.path.startsWith(prefix)) {
                 return handler->handleRequest(request);
@@ -47,7 +41,6 @@ public:
     }
     
 private:
-    // Вектор пар: префикс + уникальный указатель на обработчик
     std::vector<std::pair<QString, std::unique_ptr<RequestHandler>>> m_routes;
 };
 
@@ -63,7 +56,7 @@ int main(int argc, char *argv[])
     
     // Загрузка конфигурации
     Config& config = Config::instance();
-    QString configPath = "config.json";
+    QString configPath = "app.json";
     
     if (QFile::exists(configPath)) {
         if (config.loadFromFile(configPath)) {
