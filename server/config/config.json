@@ -1,0 +1,17 @@
+{
+    "server": {
+        "port": 8080,
+        "host": "0.0.0.0",
+        "maxConnections": 100
+    },
+    "path": {
+        "ini" : "config.ini"
+    },
+    "logging": {
+        "level": "debug",
+        "file": "server.log"
+    },
+    "security": {
+        "apiKeys": ["test-api-key-12345"]
+    }
+}
