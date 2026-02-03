@@ -28,8 +28,8 @@ RequestHandler::Response SettingsHandler::handleGet(const RequestHandler::Reques
     
     Config& config = Config::instance();
     
-    QString iniPath = config.stringValue("path.db", "");
-    
+    QString iniPath = config.stringValue("path.ini", "");
+
     QJsonObject response;
     response["iniPath"] = iniPath;
     response["exists"] = QFile::exists(iniPath);
