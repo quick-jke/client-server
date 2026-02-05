@@ -1,9 +1,8 @@
-#ifndef SETTINGSHANDLER_H
-#define SETTINGSHANDLER_H
+#ifndef OBJECTSHANDLER_H
+#define OBJECTSHANDLER_H
+#include "basehandler.hpp"
 
-#include "basehandler.h"
-
-class SettingsHandler : public BaseHandler
+class ObjectsHandler : public BaseHandler
 {
 public:
     Response handleRequest(const Request& request) override;
@@ -11,5 +10,4 @@ public:
 private:
     Response handleGet(const Request& request);
 };
-
-#endif 
+#endif

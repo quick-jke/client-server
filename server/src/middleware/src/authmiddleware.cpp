@@ -1,5 +1,5 @@
-#include "include/authmiddleware.h"
-#include "../../lib/common/logger.h"  
+#include "include/authmiddleware.hpp"
+#include "../../lib/common/logger.hpp"  
 
 AuthMiddleware::AuthMiddleware()
 {

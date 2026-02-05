@@ -1,8 +1,8 @@
 #ifndef AUTHMIDDLEWARE_H
 #define AUTHMIDDLEWARE_H
 
-#include "../../lib/requesthandler.h"
-#include "../../server/src/httpserver.h"
+#include "../../lib/requesthandler.hpp"
+#include "../../server/src/httpserver.hpp"
 #include <QSet>
 
 class AuthMiddleware : public Middleware

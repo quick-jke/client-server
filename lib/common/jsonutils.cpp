@@ -1,4 +1,4 @@
-#include "jsonutils.h"
+#include "jsonutils.hpp"
 #include <QJsonParseError>
 
 static QString lastError;

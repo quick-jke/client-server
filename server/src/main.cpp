@@ -3,16 +3,16 @@
 #include <QDir>
 #include <vector>
 #include <memory>
-#include "httpserver.h"
-#include "handlers/include/hello.h"
-#include "handlers/include/users.h"
-#include "handlers/include/graph.h"
-#include "handlers/include/settings.h"
-#include "handlers/include/objects.h"
-#include "middleware/include/loggermiddleware.h"
-#include "middleware/include/authmiddleware.h"
-#include "../../lib/common/logger.h"
-#include "../../lib/common/config.h"
+#include "httpserver.hpp"
+#include "handlers/include/hello.hpp"
+#include "handlers/include/users.hpp"
+#include "handlers/include/graph.hpp"
+#include "handlers/include/settings.hpp"
+#include "handlers/include/objects.hpp"
+#include "middleware/include/loggermiddleware.hpp"
+#include "middleware/include/authmiddleware.hpp"
+#include "../../lib/common/logger.hpp"
+#include "../../lib/common/config.hpp"
 
 class RouterHandler : public RequestHandler
 {
@@ -49,13 +49,11 @@ int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
     
-    // Настройка логгера
     Logger::instance().setLevel(Logger::DEBUG);
     Logger::instance().setLogFile("server.log");
     
     LOG_INFO("=== HTTP Server Starting ===");
     
-    // Загрузка конфигурации
     Config& config = Config::instance();
     QString configPath = "app.json";
     
@@ -69,11 +67,9 @@ int main(int argc, char *argv[])
         LOG_WARNING(QString("Config file not found: %1").arg(configPath));
     }
     
-    // Создание сервера
     quint16 port = config.intValue("server.port", 8080);
     HttpServer server(port);
     
-    // Создание маршрутизатора
     auto router = std::make_unique<RouterHandler>();
     router->addRoute("/api/hello",      std::make_unique<HelloHandler>());
     router->addRoute("/api/users",      std::make_unique<UsersHandler>());
@@ -83,19 +79,16 @@ int main(int argc, char *argv[])
     
     server.setRequestHandler(std::move(router));
     
-    // Добавление мидлвар
     server.addMiddleware(std::make_unique<LoggerMiddleware>());
     
     auto authMiddleware = std::make_unique<AuthMiddleware>();
     authMiddleware->addProtectedPath("/api/graph");
     server.addMiddleware(std::move(authMiddleware));
     
-    // Обработка ошибок
     QObject::connect(&server, &HttpServer::errorOccurred, [](const QString& error) {
         LOG_CRITICAL(error);
     });
     
-    // Запуск сервера
     if (!server.start()) {
         LOG_CRITICAL("Failed to start server");
         return 1;
@@ -104,7 +97,6 @@ int main(int argc, char *argv[])
     LOG_INFO(QString("Server is running on port %1").arg(port));
     LOG_INFO("Press Ctrl+C to stop");
     
-    // Graceful shutdown
     QObject::connect(&app, &QCoreApplication::aboutToQuit, [&server]() {
         server.stop();
         LOG_INFO("=== HTTP Server Stopped ===");

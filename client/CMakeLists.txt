@@ -2,13 +2,13 @@ project(HttpClient VERSION 1.0.0 LANGUAGES CXX)
 
 add_executable(http_client
     src/main.cpp
-    src/httpclient.h
+    src/httpclient.hpp
     src/httpclient.cpp
-    src/requestbuilder.h
+    src/requestbuilder.hpp
     src/requestbuilder.cpp
-    src/models/user.h
+    src/models/user.hpp
     src/models/user.cpp
-    src/models/graph.h
+    src/models/graph.hpp
     src/models/graph.cpp
 )
 

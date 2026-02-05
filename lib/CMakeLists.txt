@@ -1,12 +1,12 @@
 project(QtHttpLib VERSION 1.0.0 LANGUAGES CXX)
 
 add_library(qt_http_lib STATIC
-    requesthandler.h
-    common/jsonutils.h
+    requesthandler.hpp
+    common/jsonutils.hpp
     common/jsonutils.cpp
-    common/logger.h
+    common/logger.hpp
     common/logger.cpp
-    common/config.h
+    common/config.hpp
     common/config.cpp
 )
 

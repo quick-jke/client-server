@@ -8,7 +8,7 @@
 #include <QVariantMap>
 #include <functional>
 #include <memory>
-#include "../../lib/common/logger.h"
+#include "../../lib/common/logger.hpp"
 
 class HttpClient : public QObject
 {

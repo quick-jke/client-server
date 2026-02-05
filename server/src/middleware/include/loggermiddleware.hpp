@@ -1,8 +1,8 @@
 #ifndef LOGGERMIDDLEWARE_H
 #define LOGGERMIDDLEWARE_H
 
-#include "../../lib/requesthandler.h"
-#include "../../server/src/httpserver.h"
+#include "../../lib/requesthandler.hpp"
+#include "../../server/src/httpserver.hpp"
 
 class LoggerMiddleware : public Middleware
 {

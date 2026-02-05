@@ -1,10 +1,10 @@
-#include "httpclient.h"
+#include "httpclient.hpp"
 #include <QNetworkRequest>
 #include <QUrlQuery>
 #include <QTimer>
 #include <QJsonDocument>
 
-#include "../../lib/common/jsonutils.h"
+#include "../../lib/common/jsonutils.hpp"
 
 HttpClient::HttpClient(QObject *parent)
     : QObject(parent)

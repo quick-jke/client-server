@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "graph.hpp"
 
 GraphNode::GraphNode()
     : m_id(0)

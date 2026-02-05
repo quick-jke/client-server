@@ -4,7 +4,7 @@
 #include <QString>
 #include <QVariantMap>
 #include <QJsonObject>
-#include "httpclient.h"
+#include "httpclient.hpp"
 
 class RequestBuilder
 {

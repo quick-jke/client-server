@@ -1,7 +1,7 @@
 #ifndef USERSHANDLER_H
 #define USERSHANDLER_H
 
-#include "basehandler.h"
+#include "basehandler.hpp"
 #include <QVector>
 #include <QMutex>
 

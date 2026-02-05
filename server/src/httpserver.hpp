@@ -7,7 +7,7 @@
 #include <QMap>
 #include <memory>
 #include <vector>
-#include "../../lib/requesthandler.h"
+#include "../../lib/requesthandler.hpp"
 
 class Middleware {
 public:

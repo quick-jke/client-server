@@ -1,7 +1,7 @@
 #ifndef HELLOHANDLER_H
 #define HELLOHANDLER_H
 
-#include "basehandler.h"
+#include "basehandler.hpp"
 
 class HelloHandler : public BaseHandler
 {

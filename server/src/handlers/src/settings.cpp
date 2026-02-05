@@ -1,5 +1,5 @@
-#include "include/settings.h"
-#include "../../lib/common/config.h"
+#include "include/settings.hpp"
+#include "../../lib/common/config.hpp"
 #include <QJsonObject>
 #include <QFile>
 #include <QFileInfo>
@@ -48,6 +48,5 @@ RequestHandler::Response SettingsHandler::handleGet(const RequestHandler::Reques
         response["objImagesPath"] = dirPath(settings.value("objImagesPath").toString());
         response["subImagesPath"] = dirPath(settings.value("subImagesPath").toString());
     }
-    
     return successResponse(response);
 }

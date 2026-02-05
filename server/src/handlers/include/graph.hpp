@@ -1,7 +1,7 @@
 #ifndef GRAPHHANDLER_H
 #define GRAPHHANDLER_H
 
-#include "basehandler.h"
+#include "basehandler.hpp"
 #include <QVector>
 #include <QMap>
 #include <QMutex>

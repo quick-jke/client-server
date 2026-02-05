@@ -11,7 +11,7 @@ option(BUILD_SERVER "Build HTTP server application" ON)
 option(BUILD_CLIENT "Build HTTP client application" ON)
 option(BUILD_TESTS "Build tests" OFF)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Network)
+find_package(Qt6 REQUIRED COMPONENTS Core Network Core5Compat)
 
 add_subdirectory(lib)
 

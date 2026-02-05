@@ -1,11 +1,11 @@
 #include <QCoreApplication>
 #include <QTimer>
 #include <QDebug>
-#include "httpclient.h"
-#include "requestbuilder.h"
-#include "models/user.h"
-#include "models/graph.h"
-#include "../../lib/common/logger.h"
+#include "httpclient.hpp"
+#include "requestbuilder.hpp"
+#include "models/user.hpp"
+#include "models/graph.hpp"
+#include "../../lib/common/logger.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -43,10 +43,10 @@ int main(int argc, char *argv[])
 
         LOG_INFO("3. Testing /api/objects with params");
         QVariantMap params;
-        params["oldRect"] = "0";
-        params["oldScale"] = "0";
-        params["newRect"] = "2";
-        params["newScale"] = "4";
+        params["oldRect"] = 10;
+        params["oldScale"] = 20;
+        params["newRect"] = 30;
+        params["newScale"] = 40;
         client.get("http://localhost:8080/api/objects", params);
         // // 2. Hello with parameter
         // LOG_INFO("\n2. Testing /api/hello?name=Alice");

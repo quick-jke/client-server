@@ -1,4 +1,4 @@
-#include "requestbuilder.h"
+#include "requestbuilder.hpp"
 #include <QJsonDocument>  
 
 RequestBuilder::RequestBuilder(HttpClient* client)

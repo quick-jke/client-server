@@ -1,8 +1,8 @@
 #ifndef BASEHANDLER_H
 #define BASEHANDLER_H
 
-#include "../../lib/requesthandler.h"
-#include "../../lib/common/jsonutils.h"
+#include "../../lib/requesthandler.hpp"
+#include "../../lib/common/jsonutils.hpp"
 
 class BaseHandler : public RequestHandler
 {

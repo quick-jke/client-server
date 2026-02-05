@@ -1,8 +1,8 @@
-#include "httpserver.h"
+#include "httpserver.hpp"
 #include <QHostAddress>
 #include <QUrlQuery>
 #include <QDebug>
-#include "../../lib/common/logger.h"
+#include "../../lib/common/logger.hpp"
 
 HttpServer::HttpServer(quint16 port, QObject *parent)
     : QTcpServer(parent)
