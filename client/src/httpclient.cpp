@@ -146,8 +146,6 @@ QUrl HttpClient::buildUrl(const QString& baseUrl, const QVariantMap& params) con
 QNetworkRequest HttpClient::createRequest(const QUrl& url)
 {
     QNetworkRequest request(url);
-    
-    // Установка заголовков по умолчанию
     for (auto it = m_defaultHeaders.begin(); it != m_defaultHeaders.end(); ++it) {
         request.setRawHeader(it.key().toUtf8(), it.value().toString().toUtf8());
     }

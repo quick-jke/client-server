@@ -1,10 +1,10 @@
 #ifndef STORE_HPP
 #define STORE_HPP
 
-class MapStorage {
+class MapObjectStorage {
 public:
-    MapStorage();
-    ~MapStorage();
+    MapObjectStorage();
+    ~MapObjectStorage();
 
     
 private:

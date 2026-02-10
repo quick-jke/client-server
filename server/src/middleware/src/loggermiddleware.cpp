@@ -1,5 +1,5 @@
-#include "include/loggermiddleware.hpp"
-#include "../../lib/common/logger.hpp"  // ← Добавлен заголовок логгера
+#include "loggermiddleware.hpp"
+#include "../../lib/common/logger.hpp"
 #include <QDateTime>
 
 bool LoggerMiddleware::process(RequestHandler::Request& request)
@@ -10,5 +10,5 @@ bool LoggerMiddleware::process(RequestHandler::Request& request)
         request.path
     ));
     
-    return true; // Продолжаем обработку
+    return true;
 }

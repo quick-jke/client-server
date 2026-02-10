@@ -6,7 +6,7 @@
 
 HttpServer::HttpServer(quint16 port, QObject *parent)
     : QTcpServer(parent)
-    , m_port(port)
+    , port_(port)
 {
     connect(this, &QTcpServer::newConnection, this, &HttpServer::onNewConnection);
 }
@@ -18,23 +18,23 @@ HttpServer::~HttpServer()
 
 bool HttpServer::start()
 {
-    if (!listen(QHostAddress::Any, m_port)) {
+    if (!listen(QHostAddress::Any, port_)) {
         emit errorOccurred(QString("Failed to start server: %1").arg(errorString()));
         LOG_ERROR(QString("Failed to start server: %1").arg(errorString()));
         return false;
     }
     
-    LOG_INFO(QString("Server started on port %1").arg(m_port));
+    LOG_INFO(QString("Server started on port %1").arg(port_));
     return true;
 }
 
 void HttpServer::stop()
 {
-    for (auto it = m_connections.begin(); it != m_connections.end();) {
+    for (auto it = connections_.begin(); it != connections_.end();) {
         QTcpSocket* socket = it->socket;
         socket->disconnectFromHost();
         socket->deleteLater();
-        it = m_connections.erase(it);
+        it = connections_.erase(it);
     }
     
     if (isListening()) {
@@ -45,12 +45,12 @@ void HttpServer::stop()
 
 void HttpServer::setRequestHandler(std::unique_ptr<RequestHandler> handler)
 {
-    m_requestHandler = std::move(handler);
+    requestHandler_ = std::move(handler);
 }
 
 void HttpServer::addMiddleware(std::unique_ptr<Middleware> middleware)
 {
-    m_middlewares.push_back(std::move(middleware));
+    middlewares_.push_back(std::move(middleware));
 }
 
 void HttpServer::onNewConnection()
@@ -61,7 +61,7 @@ void HttpServer::onNewConnection()
             connect(socket, &QTcpSocket::readyRead, this, &HttpServer::onReadyRead);
             connect(socket, &QTcpSocket::disconnected, this, &HttpServer::onDisconnected);
             
-            m_connections[socket] = {socket, QByteArray()};
+            connections_[socket] = {socket, QByteArray()};
             LOG_DEBUG(QString("New connection from %1").arg(socket->peerAddress().toString()));
         }
     }
@@ -70,9 +70,9 @@ void HttpServer::onNewConnection()
 void HttpServer::onReadyRead()
 {
     QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
-    if (!socket || !m_connections.contains(socket)) return;
+    if (!socket || !connections_.contains(socket)) return;
 
-    ClientConnection& conn = m_connections[socket];
+    ClientConnection& conn = connections_[socket];
     conn.buffer.append(socket->readAll());
 
     if (conn.buffer.contains("\r\n\r\n")) {
@@ -89,8 +89,8 @@ void HttpServer::onReadyRead()
         LOG_INFO(QString("%1 %2 from %3").arg(request.method, request.path, request.clientAddress));
 
         RequestHandler::Response response;
-        if (m_requestHandler) {
-            response = m_requestHandler->handleRequest(request);
+        if (requestHandler_) {
+            response = requestHandler_->handleRequest(request);
         } else {
             response = RequestHandler::Response::internalError("No request handler set");
         }
@@ -105,7 +105,7 @@ void HttpServer::onDisconnected()
     if (!socket) return;
 
     LOG_DEBUG(QString("Client disconnected: %1").arg(socket->peerAddress().toString()));
-    m_connections.remove(socket);
+    connections_.remove(socket);
     socket->deleteLater();
 }
 
@@ -157,7 +157,7 @@ RequestHandler::Request HttpServer::parseRequest(const QByteArray& data, QTcpSoc
 
 bool HttpServer::processMiddlewares(RequestHandler::Request& request)
 {
-    for (auto& middleware : m_middlewares) {
+    for (auto& middleware : middlewares_) {
         if (!middleware->process(request)) {
             return false;
         }

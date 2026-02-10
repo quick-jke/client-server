@@ -43,10 +43,10 @@ private:
         QByteArray buffer;
     };
 
-    QMap<QTcpSocket*, ClientConnection> m_connections;
-    std::unique_ptr<RequestHandler> m_requestHandler;
-    std::vector<std::unique_ptr<Middleware>> m_middlewares;
-    quint16 m_port;
+    QMap<QTcpSocket*, ClientConnection> connections_;
+    std::unique_ptr<RequestHandler> requestHandler_;
+    std::vector<std::unique_ptr<Middleware>> middlewares_;
+    quint16 port_;
 
     RequestHandler::Request parseRequest(const QByteArray& data, QTcpSocket* socket) const;
     void sendResponse(QTcpSocket* socket, const RequestHandler::Response& response);

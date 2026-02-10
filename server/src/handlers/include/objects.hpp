@@ -1,6 +1,7 @@
 #ifndef OBJECTSHANDLER_H
 #define OBJECTSHANDLER_H
 #include "basehandler.hpp"
+#include "storage/include/storage.hpp"
 
 class ObjectsHandler : public BaseHandler
 {
@@ -9,5 +10,7 @@ public:
     
 private:
     Response handleGet(const Request& request);
+
+    MapObjectStorage storage_;
 };
 #endif

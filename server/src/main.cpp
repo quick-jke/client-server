@@ -4,13 +4,13 @@
 #include <vector>
 #include <memory>
 #include "httpserver.hpp"
-#include "handlers/include/hello.hpp"
-#include "handlers/include/users.hpp"
-#include "handlers/include/graph.hpp"
-#include "handlers/include/settings.hpp"
-#include "handlers/include/objects.hpp"
-#include "middleware/include/loggermiddleware.hpp"
-#include "middleware/include/authmiddleware.hpp"
+#include "hello.hpp"
+#include "users.hpp"
+#include "graph.hpp"
+#include "settings.hpp"
+#include "objects.hpp"
+#include "loggermiddleware.hpp"
+#include "authmiddleware.hpp"
 #include "../../lib/common/logger.hpp"
 #include "../../lib/common/config.hpp"
 
@@ -18,12 +18,12 @@ class RouterHandler : public RequestHandler
 {
 public:
     void addRoute(const QString& pathPrefix, std::unique_ptr<RequestHandler> handler) {
-        m_routes.emplace_back(pathPrefix, std::move(handler));
+        routes_.emplace_back(pathPrefix, std::move(handler));
     }
     
     Response handleRequest(const Request& request) override {
         std::vector<std::pair<QString, RequestHandler*>> sortedRoutes;
-        for (auto& route : m_routes) {
+        for (auto& route : routes_) {
             sortedRoutes.emplace_back(route.first, route.second.get());
         }
         
@@ -42,7 +42,7 @@ public:
     }
     
 private:
-    std::vector<std::pair<QString, std::unique_ptr<RequestHandler>>> m_routes;
+    std::vector<std::pair<QString, std::unique_ptr<RequestHandler>>> routes_;
 };
 
 int main(int argc, char *argv[])

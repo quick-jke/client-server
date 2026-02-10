@@ -15,8 +15,8 @@ public:
     void addApiKey(const QString& apiKey);
     
 private:
-    QSet<QString> m_protectedPaths;
-    QSet<QString> m_apiKeys;
+    QSet<QString> protectedPaths_;
+    QSet<QString> apiKeys_;
 };
 
 #endif // AUTHMIDDLEWARE_H

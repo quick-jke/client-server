@@ -20,6 +20,9 @@ add_executable(http_server
     src/middleware/include/authmiddleware.hpp
     src/middleware/src/authmiddleware.cpp
 
+    src/storage/include/storage.hpp
+    src/storage/src/storage.cpp
+
 
     # src/store/include/filestr.hpp
     # src/store/include/ident.hpp
@@ -44,14 +47,14 @@ target_link_libraries(http_server PRIVATE
     qt_http_lib
     Qt6::Core 
     Qt6::Network
-    Qt6::Core5Compat
 )
 
 target_include_directories(http_server PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/handlers
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/middleware
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/store
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/handlers/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/middleware/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/store/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/storage/include
 )
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config/app.json 

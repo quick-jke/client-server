@@ -1,4 +1,4 @@
-#include "include/settings.hpp"
+#include "settings.hpp"
 #include "../../lib/common/config.hpp"
 #include <QJsonObject>
 #include <QFile>

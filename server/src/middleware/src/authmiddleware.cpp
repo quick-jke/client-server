@@ -1,4 +1,4 @@
-#include "include/authmiddleware.hpp"
+#include "authmiddleware.hpp"
 #include "../../lib/common/logger.hpp"  
 
 AuthMiddleware::AuthMiddleware()
@@ -9,14 +9,14 @@ AuthMiddleware::AuthMiddleware()
 bool AuthMiddleware::process(RequestHandler::Request& request)
 {
     bool isProtected = false;
-    for (const QString& protectedPath : m_protectedPaths) {
+    for (const QString& protectedPath : protectedPaths_) {
         if (request.path.startsWith(protectedPath)) {
             isProtected = true;
             break;
         }
     }
     
-    if (!isProtected) {
+    if (!isProtected) { 
         return true; 
     }
     
@@ -26,7 +26,7 @@ bool AuthMiddleware::process(RequestHandler::Request& request)
         apiKey = request.queryParams.value("api_key", "");
     }
     
-    if (apiKey.isEmpty() || !m_apiKeys.contains(apiKey)) {
+    if (apiKey.isEmpty() || !apiKeys_.contains(apiKey)) {
         LOG_WARNING(QString("Unauthorized access attempt from %1 to %2")
             .arg(request.clientAddress, request.path));
         return false; 
@@ -38,10 +38,10 @@ bool AuthMiddleware::process(RequestHandler::Request& request)
 
 void AuthMiddleware::addProtectedPath(const QString& path)
 {
-    m_protectedPaths.insert(path);
+    protectedPaths_.insert(path);
 }
 
 void AuthMiddleware::addApiKey(const QString& apiKey)
 {
-    m_apiKeys.insert(apiKey);
+    apiKeys_.insert(apiKey);
 }
